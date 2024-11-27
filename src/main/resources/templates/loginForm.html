@@ -1,5 +1,28 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>로그인</title>
+</head>
 <body>
-테스트
+    <div>
+        <div th:text="${currentIp}"></div>
+    </div>
+    <form th:action="@{/user/login}" method="post">
+        <div>
+            <label for="username"></label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password"></label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <button type="submit">로그인</button>
+        </div>
+        <div th:if="${param.error}">
+            <p style="color:red;">로그인 실패! 사용자명이나 비밀번호를 확인해주세요.</p>
+        </div>
+    </form>
 </body>
+
 </html>
