@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원가입</title>
+</head>
+<body>
+<form th:action="@{/user/register}" method="post">
+    <div>
+        <label for="username"></label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+        <label for="password"></label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+        <button type="submit">회원가입</button>
+    </div>
+<!--    <div th:if="${param.error}">-->
+<!--        <p style="color:red;">로그인 실패! 사용자명이나 비밀번호를 확인해주세요.</p>-->
+<!--    </div>-->
+</form>
+</body>
+
+</html>

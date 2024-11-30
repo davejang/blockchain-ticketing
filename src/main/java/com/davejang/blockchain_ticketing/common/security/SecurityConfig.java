@@ -29,10 +29,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers(new AntPathRequestMatcher("/user/login"))
+                        .requestMatchers(new AntPathRequestMatcher("/user/login",
+                                                                "/user/register"))
                         .not().authenticated()
-                        .requestMatchers(new AntPathRequestMatcher("/user/logout"))
-                        .authenticated()
                         .requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
                         .hasRole("ADMIN")
                         .anyRequest()
@@ -44,10 +43,12 @@ public class SecurityConfig {
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/user/login")
                         .defaultSuccessUrl("/")
-                        .failureUrl("/user/login?error=ture"))
+                        .failureUrl("/user/login?error=ture")
+                        .permitAll())
                 .logout((logout) -> logout
                         .logoutUrl("/user/logout")
-                        .logoutSuccessUrl("/user/login"))
+                        .logoutSuccessUrl("/user/login")
+                        .permitAll())
                 .sessionManagement((sessionManagement) -> sessionManagement
                         .invalidSessionUrl("/user/login")  // 세션 만료 시 리디렉션할 URL
                         .maximumSessions(1)  // 동시에 하나의 세션만 허용

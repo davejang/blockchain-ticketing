@@ -2,6 +2,7 @@ package com.davejang.blockchain_ticketing.member.controller;
 
 import com.davejang.blockchain_ticketing.common.utils.ClientUtils;
 import com.davejang.blockchain_ticketing.member.domain.Member;
+import com.davejang.blockchain_ticketing.member.dto.MemberFormDto;
 import com.davejang.blockchain_ticketing.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -31,10 +32,16 @@ public class MemberController {
         return "loginForm";
     }
 
+    @GetMapping("/register")
+    public String memberRegisterGet() {
+        return "registerForm";
+    }
+
     @PostMapping("/register")
-    public String userRegister(Model model,
-                               @Valid @ModelAttribute Member member,
-                               HttpSession session) {
+    public String memberRegisterPost(Model model,
+                                 MemberFormDto memberFormDto,
+                                 @Valid @ModelAttribute Member member,
+                                 HttpSession session) {
 
         Member registerMember = memberService.registerUser(member);
         model.addAttribute("username", member.getName());
