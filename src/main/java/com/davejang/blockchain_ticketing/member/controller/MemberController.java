@@ -1,8 +1,8 @@
-package com.davejang.blockchain_ticketing.user.controller;
+package com.davejang.blockchain_ticketing.member.controller;
 
 import com.davejang.blockchain_ticketing.common.utils.ClientUtils;
-import com.davejang.blockchain_ticketing.user.domain.User;
-import com.davejang.blockchain_ticketing.user.service.UserService;
+import com.davejang.blockchain_ticketing.member.domain.Member;
+import com.davejang.blockchain_ticketing.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserController {
+public class MemberController {
 
-    private final UserService userService;
+    private final MemberService memberService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
     }
 
     @GetMapping("/login")
@@ -33,11 +33,11 @@ public class UserController {
 
     @PostMapping("/register")
     public String userRegister(Model model,
-                               @Valid @ModelAttribute User user,
+                               @Valid @ModelAttribute Member member,
                                HttpSession session) {
 
-        User registerUser = userService.registerUser(user);
-        model.addAttribute("username", user.getName());
+        Member registerMember = memberService.registerUser(member);
+        model.addAttribute("username", member.getName());
         return "loginSuccess";
     }
 }

@@ -1,10 +1,12 @@
 package com.davejang.blockchain_ticketing.common.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,8 +33,14 @@ public class SecurityConfig {
                         .not().authenticated()
                         .requestMatchers(new AntPathRequestMatcher("/user/logout"))
                         .authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+                        .hasRole("ADMIN")
                         .anyRequest()
                         .authenticated())
+                .csrf((csrf) -> csrf
+                        .ignoringRequestMatchers(PathRequest.toH2Console()))
+                .headers((headers) -> headers
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/user/login")
                         .defaultSuccessUrl("/")
@@ -53,9 +61,9 @@ public class SecurityConfig {
     @Bean // 로그인 테스트용
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails user = User.builder()
-                .username("user")
+                .username("admin")
                 .password(passwordEncoder().encode("1234"))
-                .roles("USER")
+                .roles("ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(user);
