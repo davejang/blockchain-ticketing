@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +26,12 @@ public class Member {
     private Role role;
 
     private String kaiaAddress;
+
+    @Builder
+    public Member(String name, String password, Role role, String kaiaAddress) {
+        this.name = name;
+        this.password = password;
+        this.role = role;
+        this.kaiaAddress = kaiaAddress;
+    }
 }

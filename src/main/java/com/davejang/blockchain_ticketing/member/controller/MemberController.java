@@ -33,18 +33,19 @@ public class MemberController {
     }
 
     @GetMapping("/register")
-    public String memberRegisterGet() {
+    public String memberRegisterGet(Model model) {
+        model.addAttribute("memberForm", new MemberFormDto());
         return "registerForm";
     }
 
     @PostMapping("/register")
     public String memberRegisterPost(Model model,
-                                 MemberFormDto memberFormDto,
-                                 @Valid @ModelAttribute Member member,
+                                 @ModelAttribute MemberFormDto memberForm,
                                  HttpSession session) {
 
-        Member registerMember = memberService.registerUser(member);
-        model.addAttribute("username", member.getName());
-        return "loginSuccess";
+        System.out.println("memberForm = " + memberForm.getName());
+        Member registerMember = memberService.registerUser(memberForm.getName(),memberForm.getPassword());
+
+        return "loginForm";
     }
 }

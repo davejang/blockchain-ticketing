@@ -20,11 +20,17 @@ public class MemberService {
     }
     
     @Transactional
-    public Member registerUser(@Valid Member member) {
-        Optional<Member> validUser = memberRepository.findByName(member.getName());
+    public Member registerUser(String username, String password) {
+        Optional<Member> validUser = memberRepository.findByName(username);
         if(validUser.isPresent()) {
             throw new IllegalArgumentException("이미 등록된 회원입니다");
         }
+
+        Member member = Member.builder()
+                .name(username)
+                .password(password)
+                .build();
+
         return memberRepository.save(member);
     }
 
