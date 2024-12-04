@@ -23,7 +23,7 @@ public class MemberService {
     @Transactional
     public Member registerUser(String username, String password) {
         Optional<Member> validUser = memberRepository.findByName(username);
-        if(validUser.isPresent()) {
+        if (validUser.isPresent()) {
             throw new IllegalArgumentException("이미 등록된 회원입니다");
         }
 
@@ -35,13 +35,6 @@ public class MemberService {
 
         return memberRepository.save(member);
     }
-
-//    public Member loginUser(String username) {
-//
-//        Member loginMember = memberRepository.findByName(username).get();
-//
-//        return loginMember;
-//    }
 
 
 }

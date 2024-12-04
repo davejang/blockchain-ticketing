@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public MemberController(MemberService memberService) {
@@ -44,7 +47,8 @@ public class MemberController {
                                  HttpSession session) {
 
         System.out.println("memberForm = " + memberForm.getName());
-        Member registerMember = memberService.registerUser(memberForm.getName(),memberForm.getPassword());
+        Member registerMember = memberService
+                .registerUser(memberForm.getName(), passwordEncoder.encode(memberForm.getPassword()));
 
         return "loginForm";
     }
