@@ -1,6 +1,7 @@
 package com.davejang.blockchain_ticketing.member.service;
 
 import com.davejang.blockchain_ticketing.member.domain.Member;
+import com.davejang.blockchain_ticketing.member.domain.Role;
 import com.davejang.blockchain_ticketing.member.repository.MemberRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,18 @@ public class MemberService {
         Member member = Member.builder()
                 .name(username)
                 .password(password)
+                .role(Role.USER)
                 .build();
 
         return memberRepository.save(member);
     }
+
+//    public Member loginUser(String username) {
+//
+//        Member loginMember = memberRepository.findByName(username).get();
+//
+//        return loginMember;
+//    }
 
 
 }

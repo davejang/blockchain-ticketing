@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
     <title>로그인</title>
 </head>
 <body>
-    <div>
-        <div th:text="${currentIp}"></div>
+    <nav th:replace="~{navbar :: navbarFragment}"></nav>
+<!--    <div>-->
+<!--        <div th:text="${currentIp}"></div>-->
+<!--    </div>-->
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <div class="text-center text-white">
+                    <form th:action="@{/user/login}" class="form-subscribe" method="post">
+                        <div>
+                            <label for="username"></label>
+                            <input class="form-control form-control-lg" type="text" id="username" name="username" required>
+                        </div>
+                        <div>
+                            <label for="password"></label>
+                            <input class="form-control form-control-lg" type="password" id="password" name="password" required>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" type="submit">로그인</button>
+                        </div>
+                        <div th:if="${param.error}">
+                            <p style="color:red;">로그인 실패! 사용자명이나 비밀번호를 확인해주세요.</p>
+                        </div>
+                    </form>
+                    <a th:href="@{/user/register}">회원가입</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <form th:action="@{/user/login}" method="post">
-        <div>
-            <label for="username"></label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="password"></label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <button type="submit">로그인</button>
-        </div>
-        <div th:if="${param.error}">
-            <p style="color:red;">로그인 실패! 사용자명이나 비밀번호를 확인해주세요.</p>
-        </div>
-    </form>
-    <a th:href="@{/user/register}">회원가입</a>
+
 </body>
 
 </html>
