@@ -33,10 +33,10 @@ public class MemberController {
                         HttpServletRequest request,
                         HttpSession session) {
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null && authentication.isAuthenticated()) {
-//            return "redirect:/";
-//        }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() != "anonymousUser") {
+            return "/error/403";
+        }
 
         String currentIp = ClientUtils.getClientIp(request);
         model.addAttribute("currentIp", currentIp);
