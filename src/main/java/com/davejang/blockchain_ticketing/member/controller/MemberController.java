@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +30,13 @@ public class MemberController {
 
     @GetMapping("/login")
     public String login(Model model,
-                        HttpServletRequest request) {
+                        HttpServletRequest request,
+                        HttpSession session) {
+
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication != null && authentication.isAuthenticated()) {
+//            return "redirect:/";
+//        }
 
         String currentIp = ClientUtils.getClientIp(request);
         model.addAttribute("currentIp", currentIp);

@@ -12,11 +12,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -51,8 +54,9 @@ public class SecurityConfig {
                         .invalidSessionUrl("/user/login")  // 세션 만료 시 리디렉션할 URL
                         .maximumSessions(1)  // 동시에 하나의 세션만 허용
                         .expiredUrl("/user/login"))
-                .exceptionHandling((exceptionHandling) -> exceptionHandling
-                        .accessDeniedPage("/access-denied"));
+                .exceptionHandling((conf) -> conf
+                        .accessDeniedHandler(customAccessDeniedHandler)
+                );
 
         return http.build();
     }
