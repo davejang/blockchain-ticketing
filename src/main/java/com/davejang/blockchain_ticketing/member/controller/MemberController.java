@@ -6,7 +6,7 @@ import com.davejang.blockchain_ticketing.member.dto.MemberFormDto;
 import com.davejang.blockchain_ticketing.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,9 +14,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(value = "/user")
+@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
@@ -51,12 +53,18 @@ public class MemberController {
 
     @PostMapping("/register")
     public String memberRegisterPost(Model model,
+                                 RedirectAttributes redirectAttributes,
                                  @ModelAttribute MemberFormDto memberForm,
                                  HttpSession session) {
 
-        System.out.println("memberForm = " + memberForm.getName());
-        Member registerMember = memberService
-                .registerUser(memberForm.getName(), passwordEncoder.encode(memberForm.getPassword()));
+        try {
+            Member registerMember = memberService
+                    .registerUser(memberForm.getName(), passwordEncoder.encode(memberForm.getPassword()));
+        }
+        catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error",true);
+            return "redirect:/user/register";
+        }
 
         return "loginForm";
     }

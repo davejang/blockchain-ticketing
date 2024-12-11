@@ -14,13 +14,13 @@
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
-            <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="col-xl-8 col-lg-8 col-md-9 position-relative">
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row justify-content-center">
 <!--                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>-->
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 row-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
@@ -55,8 +55,8 @@
                                     <div class="text-center">
                                         <a class="small" th:href="@{/user/register}">Create an Account!</a>
                                     </div>
-                                    <div th:if="${param.error}">
-                                        <p style="color:red;">로그인 실패! 사용자명이나 비밀번호를 확인해주세요.</p>
+                                    <div class="text-center" th:if="${param.error}">
+                                        <p style="color:red;">Login Failed. Please check user information.</p>
                                     </div>
                                 </div>
                             </div>
