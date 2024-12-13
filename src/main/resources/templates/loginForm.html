@@ -39,7 +39,7 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">로그인</button>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
@@ -50,13 +50,13 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="forgot-password.html">비밀번호를 잊으셨나요?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" th:href="@{/user/register}">Create an Account!</a>
+                                        <a class="small" th:href="@{/user/register}">계정을 생성하세요!</a>
                                     </div>
                                     <div class="text-center" th:if="${param.error}">
-                                        <p style="color:red;">Login Failed. Please check user information.</p>
+                                        <p style="color:red;">로그인 실패! 계정정보를 확인하세요</p>
                                     </div>
                                 </div>
                             </div>

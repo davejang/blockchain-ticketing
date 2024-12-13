@@ -19,6 +19,10 @@ public class HomeController {
             String username = authentication.getName();  // 로그인한 사용자의 이름
             model.addAttribute("username", username);  // 모델에 사용자 이름 추가
         }
+
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            model.addAttribute("isAdmin", true);
+        }
         return "dashBoard";
     }
 }
