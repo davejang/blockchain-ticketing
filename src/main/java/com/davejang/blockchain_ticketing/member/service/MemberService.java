@@ -3,11 +3,11 @@ package com.davejang.blockchain_ticketing.member.service;
 import com.davejang.blockchain_ticketing.member.domain.Member;
 import com.davejang.blockchain_ticketing.member.domain.Role;
 import com.davejang.blockchain_ticketing.member.repository.MemberRepository;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.groundx.caver_ext_kas.CaverExtKAS;
 
 import java.util.Optional;
 
