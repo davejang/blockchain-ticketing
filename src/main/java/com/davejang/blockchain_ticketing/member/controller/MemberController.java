@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import xyz.groundx.caver_ext_kas.CaverExtKAS;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -61,15 +60,11 @@ public class MemberController {
                                  @ModelAttribute MemberFormDto memberForm,
                                  HttpSession session) {
         try {
-            CaverExtKAS caver = kaiaConfig.initKas();
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error",true);
-            return "redirect:/user/register";
-        }
-
-        try {
             Member registerMember = memberService
                     .registerUser(memberForm.getName(), passwordEncoder.encode(memberForm.getPassword()));
+        }
+        catch (RuntimeException e) {
+            return "/error/500";
         }
         catch (Exception e) {
             redirectAttributes.addFlashAttribute("error",true);
