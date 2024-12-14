@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 @Configuration
+@Deprecated
 public class PropertyConfig {
 
     @Bean(name = "kaia")
