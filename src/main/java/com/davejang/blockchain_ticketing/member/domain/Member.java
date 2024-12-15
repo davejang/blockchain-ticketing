@@ -28,7 +28,10 @@ public class Member {
     private String kaiaAddress;
 
     @Builder
-    public Member(String name, String password, Role role, String kaiaAddress) {
+    public Member(String name,
+                  String password,
+                  Role role,
+                  String kaiaAddress) {
         this.name = name;
         this.password = password;
         this.role = role;
