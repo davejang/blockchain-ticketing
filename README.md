@@ -10,11 +10,11 @@ Kaia 블록체인을 API로 사용할 수 있는 서비스이며, Dapp 개발 �
 
 ## Preview
 
-## References
-<a href="https://www.klaytnapi.com/ko/resource/docs/readme/">KAS Docs</a>  
-<a href="https://docs.kaia.io/ko/">Kaia Docs</a>  
-
 ## Dependencies
 ```
 caver-java-ext-kas:1.0.0
 ```
+
+## References
+<a href="https://www.klaytnapi.com/ko/resource/docs/readme/">KAS Docs</a>  
+<a href="https://docs.kaia.io/ko/">Kaia Docs</a>  
