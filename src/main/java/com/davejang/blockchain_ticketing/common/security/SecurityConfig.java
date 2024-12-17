@@ -31,7 +31,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers("/user/login", "/user/register")
                         .not().authenticated()
-                        .requestMatchers("/h2-console/**")
+                        .requestMatchers(
+                                "/h2-console/**",
+                                "/event/admin",
+                                "/event/register")
                         .hasRole("ADMIN")
                         .anyRequest()
                         .authenticated())
