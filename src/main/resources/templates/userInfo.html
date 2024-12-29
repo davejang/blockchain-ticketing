@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <title>KaiaTicket</title>
+</head>
+<body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div class="container-fluid">
+    <p class="mb-4"></p>
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- Basic Card Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+                </div>
+                <div class="card-body">
+                    <div th:text="${kaiaAddress}"></div>
+                    The styling for this basic card example is created by using default Bootstrap
+                    utility classes. By using utility classes, the style of the card component can be
+                    easily modified with no need for any custom CSS!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/js/sb-admin-2.js"></script>
+</body>
+</html>

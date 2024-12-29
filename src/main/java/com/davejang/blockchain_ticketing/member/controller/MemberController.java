@@ -73,4 +73,14 @@ public class MemberController {
 
         return "loginForm";
     }
+
+    @GetMapping("/info")
+    public String userInfo(Model model) {
+        String username = model.getAttribute("username").toString();
+        Member currentUser = memberService.findMember(username);
+
+        model.addAttribute("kaiaAddress", currentUser.getKaiaAddress());
+
+        return "userInfo";
+    }
 }
