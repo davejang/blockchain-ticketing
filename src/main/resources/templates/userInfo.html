@@ -10,18 +10,22 @@
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
 <div class="container-fluid">
     <p class="mb-4"></p>
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-lg-6">
             <!-- Basic Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">사용자 정보</h6>
                 </div>
                 <div class="card-body">
-                    <div th:text="${kaiaAddress}"></div>
-                    The styling for this basic card example is created by using default Bootstrap
-                    utility classes. By using utility classes, the style of the card component can be
-                    easily modified with no need for any custom CSS!
+                    <div class="mb-1">
+                        <span class="text-xs font-weight-bold text-primary text-uppercase mb-1 mr-1">아이디</span>
+                        <span class="text-xs mb-1" th:text="${username}"></span>
+                    </div>
+                    <div class="mb-1">
+                        <span class="text-xs font-weight-bold text-primary text-uppercase mb-1 mr-1">지갑 주소</span>
+                        <span class="text-xs mb-1" th:text="${kaiaAddress}"></span>
+                    </div>
                 </div>
             </div>
         </div>
