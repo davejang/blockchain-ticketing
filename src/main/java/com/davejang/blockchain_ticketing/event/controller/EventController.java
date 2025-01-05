@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class EventController {
 
-    @GetMapping(value = "admin")
+    @GetMapping(value = "/admin")
     public String eventAdmin(Model model) {
         return "adminPage";
     }
+
+    @GetMapping(value = "/register")
+    public String registerPage(Model model) { return "eventRegister"; }
 }
