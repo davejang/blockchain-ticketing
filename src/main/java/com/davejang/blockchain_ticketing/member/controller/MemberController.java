@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -57,11 +58,15 @@ public class MemberController {
     @PostMapping("/register")
     public String memberRegisterPost(Model model,
                                  RedirectAttributes redirectAttributes,
-                                 @ModelAttribute MemberFormDto memberForm,
+                                 @ModelAttribute @Validated MemberFormDto memberForm,
                                  HttpSession session) {
         try {
-            Member registerMember = memberService
-                    .registerUser(memberForm.getName(), passwordEncoder.encode(memberForm.getPassword()));
+            Member registerMember = memberService.registerUser
+                    (
+                            memberForm.getName(),
+                            passwordEncoder.encode(memberForm.getPassword()),
+                            memberForm.getEmail()
+                    );
         }
         catch (RuntimeException e) {
             return "/error/500";

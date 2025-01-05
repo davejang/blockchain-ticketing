@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.groundx.caver_ext_kas.CaverExtKAS;
 import xyz.groundx.caver_ext_kas.rest_client.io.swagger.client.api.wallet.model.Account;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,15 +37,24 @@ public class MemberService {
 
         return findMember.get();
     }
+
+    public List<Member> findAllMembers() {
+        return memberRepository.findAll();
+    }
     
     @Transactional
-    public Member registerUser(String username, String password) {
+    public Member registerUser(String username, String password, String email) {
         String kaiaAddress;
         Optional<Member> validUser = memberRepository.findByName(username);
+        Optional<Member> validEmail = memberRepository.findByEmail(email);
 
         if (validUser.isPresent()) {
             log.info("해당 유저가 이미 존재합니다. {}", username);
             throw new IllegalArgumentException("이미 등록된 회원입니다");
+        }
+        if (validEmail.isPresent()) {
+            log.info("해당 이메일로 이미 등록하였습니다. {}", email);
+            throw new IllegalArgumentException("이미 등록된 이메일입니다");
         }
 
         try {
@@ -58,6 +68,7 @@ public class MemberService {
         Member member = Member.builder()
                 .name(username)
                 .password(password)
+                .email(email)
                 .kaiaAddress(kaiaAddress)
                 .role(Role.USER)
                 .build();

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <title>KaiaTicket</title>
+</head>
+<body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <ul th:replace="~{adminNavigation :: adminNavigationFragment}"></ul>
+    <div class="container-fluid">
+        <p class="mb-4"></p>
+        <div class="row">
+            <table class="table table-vertical-center">
+                <thead>
+                <tr>
+                    <th>유저명</th>
+                    <th>이메일</th>
+                    <th>지갑주소</th>
+                    <th>가입일</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${not #lists.isEmpty(memberList)}" th:each="row, iterStat:${memberList}">
+                        <td th:text="${row.name}"></td>
+                        <td th:text="${row.email}"></td>
+                        <td th:text="${row.kaiaAddress}"></td>
+                        <td th:text="${row.registerDate}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!--&lt;!&ndash; event register Modal &ndash;&gt;-->
+<!--<div class="modal fade" id="eventRegisterModal" tabindex="-1" role="dialog" aria-labelledby="eventRegisterModalLabel"-->
+<!--     aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="eventRegisterModalLabel">댓글작성</h5>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            <form th:action="@{/board/comment ( id=${board.id}, page=${currentPage})}" method="post" class="modif-btn">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <div class="modal-body">&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <div class="col-sm-10">&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <textarea type="text" rows="5" id="content" name="content" class="form-control" placeholder="content" required></textarea>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;                <div class="modal-footer">&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <button type="submit" class="btn btn-primary">작성</button>&ndash;&gt;-->
+<!--            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">아니오</button>-->
+<!--            &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </form>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/js/sb-admin-2.js"></script>
+<script src="/js/chart-area-demo.js"></script>
+
+</body>
+</html>

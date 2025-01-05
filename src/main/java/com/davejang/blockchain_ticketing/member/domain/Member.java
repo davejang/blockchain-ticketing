@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -22,19 +24,27 @@ public class Member {
     @NotBlank
     private String password;
 
+    private String email;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
     private String kaiaAddress;
 
+    private LocalDateTime registerDate;
+
     @Builder
     public Member(String name,
                   String password,
+                  String email,
                   Role role,
-                  String kaiaAddress) {
+                  String kaiaAddress,
+                  LocalDateTime registerDate) {
         this.name = name;
         this.password = password;
+        this.email = email;
         this.role = role;
         this.kaiaAddress = kaiaAddress;
+        this.registerDate = registerDate;
     }
 }

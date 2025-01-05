@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -17,6 +18,10 @@ public class EventService {
     @Autowired
     public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
+    }
+
+    public List<Event> findAllEvents() {
+        return eventRepository.findAll();
     }
 
     @Transactional
@@ -32,6 +37,6 @@ public class EventService {
                 .endDate(endDate)
                 .build();
 
-        return event;
+        return eventRepository.save(event);
     }
 }
