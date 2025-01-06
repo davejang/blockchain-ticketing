@@ -20,10 +20,10 @@
             <table class="table table-vertical-center">
                 <thead>
                     <tr>
-                        <th>이벤트</th>
-                        <th>생성일</th>
-                        <th>수정일</th>
-                        <th>삭제</th>
+                        <th class="m-0 font-weight-bold text-primary">이벤트</th>
+                        <th class="m-0 font-weight-bold text-primary">생성일</th>
+                        <th class="m-0 font-weight-bold text-primary">수정일</th>
+                        <th class="m-0 font-weight-bold text-primary">삭제</th>
                     </tr>
                 </thead>
             </table>
@@ -44,17 +44,19 @@
             <div class="modal-header">
                 <h6 class="m-0 font-weight-bold text-primary" id="eventRegisterModalLabel">이벤트 등록</h6>
             </div>
-<!--            <form th:action="@{/board/comment ( id=${board.id}, page=${currentPage})}" method="post" class="modif-btn">-->
-<!--                <div class="modal-body">-->
-<!--                    <div class="col-sm-10">-->
-<!--                        <textarea type="text" rows="5" id="content" name="content" class="form-control" placeholder="content" required></textarea>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="submit" class="btn btn-primary">작성</button>-->
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">닫기</button>
-<!--                </div>-->
-<!--            </form>-->
+            <div class="card-body row justify-content-center">
+                <form th:action="@{/event/register}">
+                    <div class="row md-4">
+                        <div class="form-group">
+                            <input type="eventName" class="form-control form-control-user" name="eventName" id="eventName" aria-describedby="emailHelp" placeholder="이벤트명">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <button type="submit" class="btn btn-primary">제출</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">닫기</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

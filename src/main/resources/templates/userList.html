@@ -18,15 +18,17 @@
             <table class="table table-vertical-center">
                 <thead>
                 <tr>
-                    <th>유저명</th>
-                    <th>이메일</th>
-                    <th>지갑주소</th>
-                    <th>가입일</th>
+                    <th class="m-0 font-weight-bold text-primary">유저명</th>
+                    <th class="m-0 font-weight-bold text-primary">권한</th>
+                    <th class="m-0 font-weight-bold text-primary">이메일</th>
+                    <th class="m-0 font-weight-bold text-primary">지갑주소</th>
+                    <th class="m-0 font-weight-bold text-primary">가입일</th>
                 </tr>
                 </thead>
                 <tbody>
                     <tr th:if="${not #lists.isEmpty(memberList)}" th:each="row, iterStat:${memberList}">
                         <td th:text="${row.name}"></td>
+                        <td th:text="${row.role}"></td>
                         <td th:text="${row.email}"></td>
                         <td th:text="${row.kaiaAddress}"></td>
                         <td th:text="${row.registerDate}"></td>
