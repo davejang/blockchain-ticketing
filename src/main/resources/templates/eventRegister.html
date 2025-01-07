@@ -48,7 +48,10 @@
                 <form th:action="@{/event/register}">
                     <div class="row md-4">
                         <div class="form-group">
-                            <input type="eventName" class="form-control form-control-user" name="eventName" id="eventName" aria-describedby="emailHelp" placeholder="이벤트명">
+                            <input class="form-control form-control-user" name="eventName" id="eventName" placeholder="이벤트명">
+                            <input class="form-control form-control-user" name="description" id="description"  placeholder="이벤트 설명">
+                            <input type="date" name="startDate" id="startDate">
+                            <input type="date" name="endDate" id="endDate">
                         </div>
                     </div>
                     <div class="row justify-content-center">

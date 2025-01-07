@@ -68,12 +68,12 @@ public class MemberController {
                             memberForm.getEmail()
                     );
         }
-        catch (RuntimeException e) {
-            return "/error/500";
-        }
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("error",true);
             return "redirect:/user/register";
+        }
+        catch (RuntimeException e) {
+            return "/error/500";
         }
 
         return "loginForm";
