@@ -21,11 +21,18 @@
                 <thead>
                     <tr>
                         <th class="m-0 font-weight-bold text-primary">이벤트</th>
-                        <th class="m-0 font-weight-bold text-primary">생성일</th>
-                        <th class="m-0 font-weight-bold text-primary">수정일</th>
+                        <th class="m-0 font-weight-bold text-primary">시작일</th>
+                        <th class="m-0 font-weight-bold text-primary">종료일</th>
                         <th class="m-0 font-weight-bold text-primary">삭제</th>
                     </tr>
                 </thead>
+                <tbody>
+                <tr th:if="${not #lists.isEmpty(eventList)}" th:each="row, iterStat:${eventList}">
+                    <td th:text="${row.eventName}"></td>
+                    <td th:text="${row.startDate}"></td>
+                    <td th:text="${row.endDate}"></td>
+                </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -45,7 +52,7 @@
                 <h6 class="m-0 font-weight-bold text-primary" id="eventRegisterModalLabel">이벤트 등록</h6>
             </div>
             <div class="card-body row justify-content-center">
-                <form th:action="@{/event/register}">
+                <form th:action="@{/event/register}" method="post" th:object="${eventForm}">
                     <div class="row md-4">
                         <div class="form-group">
                             <input class="form-control form-control-user" name="eventName" id="eventName" placeholder="이벤트명">
@@ -59,6 +66,9 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">닫기</button>
                     </div>
                 </form>
+                <div th:if="${error != null}" style="color: red;">
+                    <p th:text="날짜를 확인해주세요"></p>
+                </div>
             </div>
         </div>
     </div>

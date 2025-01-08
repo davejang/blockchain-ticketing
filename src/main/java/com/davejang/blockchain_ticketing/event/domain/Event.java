@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,17 +29,15 @@ public class Event {
 
     private String description;
 
-    @NotBlank
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
-    @NotBlank
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @Builder
     public Event(String eventName,
                  String description,
-                 LocalDateTime startDate,
-                 LocalDateTime endDate) {
+                 LocalDate startDate,
+                 LocalDate endDate) {
         this.eventName = eventName;
         this.description = description;
         this.startDate = startDate;

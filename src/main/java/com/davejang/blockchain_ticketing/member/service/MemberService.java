@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.groundx.caver_ext_kas.CaverExtKAS;
 import xyz.groundx.caver_ext_kas.rest_client.io.swagger.client.api.wallet.model.Account;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +63,7 @@ public class MemberService {
             Account account = caver.kas.wallet.createAccount();
             kaiaAddress = account.getAddress();
         } catch (Exception e) {
+            log.error("KAS 연결 실패");
             throw new RuntimeException("KAS 연결 실패");
         }
 
@@ -71,6 +73,7 @@ public class MemberService {
                 .email(email)
                 .kaiaAddress(kaiaAddress)
                 .role(Role.USER)
+                .registerDate(LocalDate.now())
                 .build();
 
         return memberRepository.save(member);

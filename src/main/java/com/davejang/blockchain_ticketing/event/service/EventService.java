@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,8 +28,13 @@ public class EventService {
     @Transactional
     public Event registerEvent(String eventName,
                                String description,
-                               LocalDateTime startDate,
-                               LocalDateTime endDate) {
+                               LocalDate startDate,
+                               LocalDate endDate) {
+
+        if(startDate.isAfter(endDate)) {
+            log.info("시작일 {} 이 종료일 {} 이후입니다.", startDate, endDate);
+            throw new IllegalArgumentException("날짜 설정 에러");
+        }
 
         Event event = Event.builder()
                 .eventName(eventName)

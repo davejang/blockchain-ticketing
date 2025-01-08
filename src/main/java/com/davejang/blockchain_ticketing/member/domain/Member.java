@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -31,7 +32,7 @@ public class Member {
 
     private String kaiaAddress;
 
-    private LocalDateTime registerDate;
+    private LocalDate registerDate;
 
     @Builder
     public Member(String name,
@@ -39,7 +40,7 @@ public class Member {
                   String email,
                   Role role,
                   String kaiaAddress,
-                  LocalDateTime registerDate) {
+                  LocalDate registerDate) {
         this.name = name;
         this.password = password;
         this.email = email;
