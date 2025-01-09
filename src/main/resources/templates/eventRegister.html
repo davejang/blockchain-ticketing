@@ -14,7 +14,7 @@
     <ul th:replace="~{adminNavigation :: adminNavigationFragment}"></ul>
     <div class="container-fluid">
         <p class="mb-4"></p>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#eventRegisterModal">이벤트 등록</button>
+        <button type="button" class="btn btn-primary" th:onclick="'location.href=\'' + @{/admin/event/register} + '\';'">이벤트 등록</button>
         <p class="mb-4"></p>
         <div class="row">
             <table class="table table-vertical-center">
@@ -42,37 +42,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
-<!-- event register Modal -->
-<div class="modal fade" id="eventRegisterModal" tabindex="-1" role="dialog" aria-labelledby="eventRegisterModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="m-0 font-weight-bold text-primary" id="eventRegisterModalLabel">이벤트 등록</h6>
-            </div>
-            <div class="card-body row justify-content-center">
-                <form th:action="@{/event/register}" method="post" th:object="${eventForm}">
-                    <div class="row md-4">
-                        <div class="form-group">
-                            <input class="form-control form-control-user" name="eventName" id="eventName" placeholder="이벤트명">
-                            <input class="form-control form-control-user" name="description" id="description"  placeholder="이벤트 설명">
-                            <input type="date" name="startDate" id="startDate">
-                            <input type="date" name="endDate" id="endDate">
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button type="submit" class="btn btn-primary">제출</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">닫기</button>
-                    </div>
-                </form>
-                <div th:if="${error != null}" style="color: red;">
-                    <p th:text="날짜를 확인해주세요"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

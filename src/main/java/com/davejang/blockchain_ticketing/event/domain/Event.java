@@ -29,8 +29,10 @@ public class Event {
 
     private String description;
 
+    @NotBlank
     private LocalDate startDate;
 
+    @NotBlank
     private LocalDate endDate;
 
     @Builder

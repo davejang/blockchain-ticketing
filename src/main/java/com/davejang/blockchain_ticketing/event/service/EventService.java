@@ -28,19 +28,30 @@ public class EventService {
     @Transactional
     public Event registerEvent(String eventName,
                                String description,
-                               LocalDate startDate,
-                               LocalDate endDate) {
+                               String startDate,
+                               String endDate) {
 
-        if(startDate.isAfter(endDate)) {
+        LocalDate startDateParse = LocalDate.parse(startDate);
+        LocalDate endDateParse = LocalDate.parse(endDate);
+
+        if(eventName.isEmpty()) {
+            log.error("이벤트 제목이 공백입니다");
+            throw new IllegalArgumentException("이벤트 제목을 작성하세요");
+        }
+        if(startDate.isEmpty() || endDate.isEmpty()) {
+            log.error("날짜가 공백입니다");
+            throw new IllegalArgumentException("날짜를 입력하세요");
+        }
+        if(startDateParse.isAfter(endDateParse)) {
             log.info("시작일 {} 이 종료일 {} 이후입니다.", startDate, endDate);
-            throw new IllegalArgumentException("날짜 설정 에러");
+            throw new IllegalArgumentException("날짜를 확인하세요");
         }
 
         Event event = Event.builder()
                 .eventName(eventName)
                 .description(description)
-                .startDate(startDate)
-                .endDate(endDate)
+                .startDate(startDateParse)
+                .endDate(endDateParse)
                 .build();
 
         return eventRepository.save(event);

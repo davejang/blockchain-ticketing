@@ -37,6 +37,11 @@ public class AdminController {
         return "eventRegister";
     }
 
+    @GetMapping("/event/register")
+    public String eventRegisterForm(Model model) {
+        return "eventRegisterForm";
+    }
+
     @GetMapping("/user-console")
     public String userManagement(Model model) {
         List<Member> memberList = memberService.findAllMembers();

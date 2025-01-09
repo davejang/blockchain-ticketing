@@ -8,14 +8,12 @@ import java.time.LocalDateTime;
 
 @Data
 public class EventFormDto {
-    @NotBlank
+
     private String eventName;
 
     private String description;
 
-    @NotBlank
     private String startDate;
 
-    @NotBlank
     private String endDate;
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,18 +32,20 @@ public class EventController {
     @PostMapping(value = "/register")
     public String registerEvent(Model model,
                                 RedirectAttributes redirectAttributes,
-                                @ModelAttribute @Validated EventFormDto eventForm) {
+                                @ModelAttribute EventFormDto eventForm) {
+
         try {
             Event registerEvent = eventService.registerEvent(
                     eventForm.getEventName(),
                     eventForm.getDescription(),
-                    LocalDate.parse(eventForm.getStartDate()),
-                    LocalDate.parse(eventForm.getEndDate())
+                    eventForm.getStartDate(),
+                    eventForm.getEndDate()
             );
         }
         catch (IllegalArgumentException e) {
-            model.addAttribute("error", true);
-//            return "redirect:/admin/event-console/#";
+            String infoMessage = e.getMessage();
+            redirectAttributes.addFlashAttribute("message", infoMessage);
+            return "redirect:/admin/event/register";
         }
         catch (RuntimeException e) {
             return "/error/500";
