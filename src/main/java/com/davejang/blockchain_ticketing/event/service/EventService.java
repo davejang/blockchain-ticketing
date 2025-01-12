@@ -2,6 +2,7 @@ package com.davejang.blockchain_ticketing.event.service;
 
 import com.davejang.blockchain_ticketing.event.domain.Event;
 import com.davejang.blockchain_ticketing.event.repository.EventRepository;
+import com.davejang.blockchain_ticketing.member.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -55,5 +57,16 @@ public class EventService {
                 .build();
 
         return eventRepository.save(event);
+    }
+
+    @Transactional
+    public void deleteEvent(String eventName) {
+        Optional<Event> event = eventRepository.findByEventName(eventName);
+
+        if (event.isEmpty()) {
+            log.info("이벤트가 존재하지 않습니다. {}", eventName);
+            throw new IllegalArgumentException("존재하지 않는 이벤트입니다");
+        }
+        eventRepository.delete(event.get());
     }
 }

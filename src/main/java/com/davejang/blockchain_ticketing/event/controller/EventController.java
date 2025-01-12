@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
@@ -46,6 +43,19 @@ public class EventController {
             String infoMessage = e.getMessage();
             redirectAttributes.addFlashAttribute("message", infoMessage);
             return "redirect:/admin/event/register";
+        }
+        catch (RuntimeException e) {
+            return "/error/500";
+        }
+
+        return "redirect:/admin/event-console";
+    }
+
+    @DeleteMapping(value = "/delete")
+    public String deleteEvent(String eventName) {
+        
+        try {
+            eventService.deleteEvent(eventName);
         }
         catch (RuntimeException e) {
             return "/error/500";

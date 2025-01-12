@@ -31,7 +31,7 @@ public class MemberService {
     public Member findMember(String username) {
         Optional<Member> findMember = memberRepository.findByName(username);
 
-        if (!findMember.isPresent()) {
+        if (findMember.isEmpty()) {
             log.info("유저가 존재하지 않습니다. {}", username);
             throw new IllegalArgumentException("존재하지 않는 회원입니다");
         }
