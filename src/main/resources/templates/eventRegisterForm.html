@@ -21,14 +21,15 @@
                         <h6 class="m-0 font-weight-bold text-primary">이벤트 등록</h6>
                     </div>
                     <div class="card-body row justify-content-center">
-                            <form th:action="@{/event/register}" method="post" th:object="${eventForm}">
+                            <form th:action="@{/event}" method="post" th:object="${eventForm}">
                                 <div class="row md-4">
                                     <div class="form-group">
                                         <div>
                                             <input class="form-control form-control-user" name="eventName" id="eventName" placeholder="이벤트명">
                                         </div>
                                         <div>
-                                            <input class="form-control form-control-user" name="description" id="description"  placeholder="이벤트 설명">
+                                            <label for="description">공연정보</label>
+                                            <textarea class="form-control form-control-user" name="description" id="description"></textarea>
                                         </div>
                                         <div>
                                             <label for="location">공연장소</label>

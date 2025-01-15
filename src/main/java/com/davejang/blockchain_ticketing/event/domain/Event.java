@@ -43,12 +43,14 @@ public class Event {
     @Builder
     public Event(String eventName,
                  String description,
+                 String location,
                  String performanceTime,
                  Rating rating,
                  LocalDate startDate,
                  LocalDate endDate) {
         this.eventName = eventName;
         this.description = description;
+        this.location = location;
         this.performanceTime = performanceTime;
         this.rating = rating;
         this.startDate = startDate;

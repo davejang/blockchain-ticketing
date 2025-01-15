@@ -32,7 +32,9 @@
                     <td th:text="${row.startDate}"></td>
                     <td th:text="${row.endDate}"></td>
                     <td class="">
-                        <a class="btn btn-primary">삭제</a>
+                        <form th:action="@{/event (eventName=${row.eventName})}" th:metohd="delete">
+                            <button type="submit" class="btn btn-primary">삭제</button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>

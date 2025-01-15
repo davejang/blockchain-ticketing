@@ -26,7 +26,7 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @PostMapping(value = "/register")
+    @PostMapping
     public String registerEvent(Model model,
                                 RedirectAttributes redirectAttributes,
                                 @ModelAttribute EventFormDto eventForm) {
@@ -35,6 +35,8 @@ public class EventController {
             Event registerEvent = eventService.registerEvent(
                     eventForm.getEventName(),
                     eventForm.getDescription(),
+                    eventForm.getLocation(),
+                    eventForm.getPerformanceTime(),
                     eventForm.getRating(),
                     eventForm.getStartDate(),
                     eventForm.getEndDate()
@@ -52,7 +54,7 @@ public class EventController {
         return "redirect:/admin/event-console";
     }
 
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping
     public String deleteEvent(String eventName) {
 
         try {

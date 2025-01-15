@@ -31,6 +31,8 @@ public class EventService {
     @Transactional
     public Event registerEvent(String eventName,
                                String description,
+                               String location,
+                               String performanceTime,
                                String rating,
                                String startDate,
                                String endDate) {
@@ -54,6 +56,8 @@ public class EventService {
         Event event = Event.builder()
                 .eventName(eventName)
                 .description(description)
+                .location(location)
+                .performanceTime(performanceTime)
                 .rating(Rating.valueOf(rating))
                 .startDate(startDateParse)
                 .endDate(endDateParse)
