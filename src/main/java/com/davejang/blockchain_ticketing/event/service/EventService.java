@@ -1,6 +1,7 @@
 package com.davejang.blockchain_ticketing.event.service;
 
 import com.davejang.blockchain_ticketing.event.domain.Event;
+import com.davejang.blockchain_ticketing.event.domain.Rating;
 import com.davejang.blockchain_ticketing.event.repository.EventRepository;
 import com.davejang.blockchain_ticketing.member.domain.Member;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ public class EventService {
     @Transactional
     public Event registerEvent(String eventName,
                                String description,
+                               String rating,
                                String startDate,
                                String endDate) {
 
@@ -52,6 +54,7 @@ public class EventService {
         Event event = Event.builder()
                 .eventName(eventName)
                 .description(description)
+                .rating(Rating.valueOf(rating))
                 .startDate(startDateParse)
                 .endDate(endDateParse)
                 .build();

@@ -1,10 +1,7 @@
 package com.davejang.blockchain_ticketing.event.domain;
 
 import com.davejang.blockchain_ticketing.member.domain.Role;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jnr.constants.platform.Local;
@@ -30,6 +27,13 @@ public class Event {
 
     private String description;
 
+    private String location;
+
+    private String performanceTime;
+
+    @Enumerated(EnumType.STRING)
+    private Rating rating;
+
     @NotNull
     private LocalDate startDate;
 
@@ -39,10 +43,14 @@ public class Event {
     @Builder
     public Event(String eventName,
                  String description,
+                 String performanceTime,
+                 Rating rating,
                  LocalDate startDate,
                  LocalDate endDate) {
         this.eventName = eventName;
         this.description = description;
+        this.performanceTime = performanceTime;
+        this.rating = rating;
         this.startDate = startDate;
         this.endDate = endDate;
     }

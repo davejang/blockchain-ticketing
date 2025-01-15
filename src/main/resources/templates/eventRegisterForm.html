@@ -24,10 +24,37 @@
                             <form th:action="@{/event/register}" method="post" th:object="${eventForm}">
                                 <div class="row md-4">
                                     <div class="form-group">
-                                        <input class="form-control form-control-user" name="eventName" id="eventName" placeholder="이벤트명">
-                                        <input class="form-control form-control-user" name="description" id="description"  placeholder="이벤트 설명">
-                                        <input type="date" name="startDate" id="startDate">
-                                        <input type="date" name="endDate" id="endDate">
+                                        <div>
+                                            <input class="form-control form-control-user" name="eventName" id="eventName" placeholder="이벤트명">
+                                        </div>
+                                        <div>
+                                            <input class="form-control form-control-user" name="description" id="description"  placeholder="이벤트 설명">
+                                        </div>
+                                        <div>
+                                            <label for="location">공연장소</label>
+                                            <input class="form-control" name="location" id="location">
+                                        </div>
+                                        <div>
+                                            <label for="performanceTime">공연시간</label>
+                                            <input class="form-control" name="performanceTime" id="performanceTime">
+                                        </div>
+                                        <div>
+                                            <label for="rating">관람등급</label>
+                                            <select class="form-control form-control-user" name="rating" id="rating">
+                                                <option th:value="ALL" th:text="|전체 이용가|"></option>
+                                                <option th:value="R12" th:text="|12세 이용가|"></option>
+                                                <option th:value="R15" th:text="|15세 이용가|"></option>
+                                                <option th:value="R18" th:text="|18세 이용가|"></option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="startDate">공연 시작일</label>
+                                            <input class="form-control" type="date" name="startDate" id="startDate">
+                                        </div>
+                                        <div>
+                                            <label for="endDate">공연 종료일</label>
+                                            <input class="form-control" type="date" name="endDate" id="endDate">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
@@ -49,37 +76,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
-<!-- event register Modal -->
-<div class="modal fade" id="eventRegisterModal" tabindex="-1" role="dialog" aria-labelledby="eventRegisterModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="card-body row justify-content-center">
-                <form th:action="@{/event/register}" method="post" th:object="${eventForm}">
-                    <div class="row md-4">
-                        <div class="form-group">
-                            <input class="form-control form-control-user" name="eventName" id="eventName" placeholder="이벤트명">
-                            <input class="form-control form-control-user" name="description" id="description"  placeholder="이벤트 설명">
-                            <input type="date" name="startDate" id="startDate">
-                            <input type="date" name="endDate" id="endDate">
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button type="submit" class="btn btn-primary">제출</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">닫기</button>
-                    </div>
-                </form>
-                <div th:if="${error != null}" style="color: red;">
-                    <p th:text="날짜를 확인해주세요"></p>
-                </div>
-            </div>
-            <div class="modal-header">
-                <h6 class="m-0 font-weight-bold text-primary" id="eventRegisterModalLabel">이벤트 등록</h6>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

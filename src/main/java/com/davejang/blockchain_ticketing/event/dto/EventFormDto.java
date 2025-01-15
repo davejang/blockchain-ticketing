@@ -13,6 +13,12 @@ public class EventFormDto {
 
     private String description;
 
+    private String location;
+
+    private String performanceTime;
+
+    private String rating;
+
     private String startDate;
 
     private String endDate;

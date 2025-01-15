@@ -35,6 +35,7 @@ public class EventController {
             Event registerEvent = eventService.registerEvent(
                     eventForm.getEventName(),
                     eventForm.getDescription(),
+                    eventForm.getRating(),
                     eventForm.getStartDate(),
                     eventForm.getEndDate()
             );
@@ -53,7 +54,7 @@ public class EventController {
 
     @DeleteMapping(value = "/delete")
     public String deleteEvent(String eventName) {
-        
+
         try {
             eventService.deleteEvent(eventName);
         }
