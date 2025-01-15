@@ -15,6 +15,8 @@ public class EventFormDto {
 
     private String rating;
 
+    private int price;
+
     private String startDate;
 
     private String endDate;

@@ -34,6 +34,7 @@ public class EventService {
                                String location,
                                String performanceTime,
                                String rating,
+                               int price,
                                String startDate,
                                String endDate) {
 
@@ -59,6 +60,7 @@ public class EventService {
                 .location(location)
                 .performanceTime(performanceTime)
                 .rating(Rating.valueOf(rating))
+                .price(price)
                 .startDate(startDateParse)
                 .endDate(endDateParse)
                 .build();

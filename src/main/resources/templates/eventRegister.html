@@ -32,7 +32,7 @@
                     <td th:text="${row.startDate}"></td>
                     <td th:text="${row.endDate}"></td>
                     <td class="">
-                        <form th:action="@{/event (id=${row.id}, eventName=${row.eventName})}" th:method="delete">
+                        <form th:action="@{/event (id=${row.id}, eventName=${row.eventName})}" th:method="delete" onsubmit="return showConfirm()">
                             <button type="submit" class="btn btn-primary">삭제</button>
                         </form>
                     </td>
@@ -67,6 +67,17 @@
     </div>
 </div>
 
+<script>
+    function showConfirm() {
+        const result = confirm("삭제하시겠습니까?");
+        if(result) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+</script>
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>

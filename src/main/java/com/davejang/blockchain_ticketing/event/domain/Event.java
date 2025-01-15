@@ -35,6 +35,9 @@ public class Event {
     private Rating rating;
 
     @NotNull
+    private int price;
+
+    @NotNull
     private LocalDate startDate;
 
     @NotNull
@@ -46,6 +49,7 @@ public class Event {
                  String location,
                  String performanceTime,
                  Rating rating,
+                 int price,
                  LocalDate startDate,
                  LocalDate endDate) {
         this.eventName = eventName;
@@ -53,6 +57,7 @@ public class Event {
         this.location = location;
         this.performanceTime = performanceTime;
         this.rating = rating;
+        this.price = price;
         this.startDate = startDate;
         this.endDate = endDate;
     }

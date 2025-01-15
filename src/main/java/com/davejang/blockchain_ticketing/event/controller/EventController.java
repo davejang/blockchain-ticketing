@@ -26,6 +26,12 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    @GetMapping(value = "/info")
+    public String eventInformation(Model model) {
+
+        return "eventInformation";
+    }
+
     @PostMapping
     public String registerEvent(Model model,
                                 RedirectAttributes redirectAttributes,
@@ -38,6 +44,7 @@ public class EventController {
                     eventForm.getLocation(),
                     eventForm.getPerformanceTime(),
                     eventForm.getRating(),
+                    eventForm.getPrice(),
                     eventForm.getStartDate(),
                     eventForm.getEndDate()
             );
