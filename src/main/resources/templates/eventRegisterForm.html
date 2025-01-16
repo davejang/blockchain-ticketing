@@ -21,7 +21,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">이벤트 등록</h6>
                     </div>
                     <div class="card-body row justify-content-center">
-                            <form th:action="@{/event}" method="post" th:object="${eventForm}">
+                            <form th:action="@{/event}" method="post" th:object="${eventForm}" onsubmit="return showConfirm()">
                                 <div class="row md-4">
                                     <div class="form-group">
                                         <div>
@@ -101,6 +101,17 @@
     </div>
 </div>
 
+<script>
+    function showConfirm() {
+        const result = confirm("등록하시겠습니까?");
+        if(result) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+</script>
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>

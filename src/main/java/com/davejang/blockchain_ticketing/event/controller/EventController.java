@@ -26,8 +26,12 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @GetMapping(value = "/info")
-    public String eventInformation(Model model) {
+    @GetMapping(value = "/info/{id}")
+    public String eventInformation(Model model,
+                                   @PathVariable Long id) {
+
+        Event event = eventService.getEvent(id);
+        model.addAttribute("event", event);
 
         return "eventInformation";
     }

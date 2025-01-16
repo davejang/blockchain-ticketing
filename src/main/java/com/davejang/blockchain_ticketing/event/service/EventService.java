@@ -28,6 +28,15 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+    public Event getEvent(Long id) {
+        Optional<Event> event = eventRepository.findById(id);
+        try {
+            return event.get();
+        } catch (Exception e) {
+            throw new NullPointerException();
+        }
+    }
+
     @Transactional
     public Event registerEvent(String eventName,
                                String description,
