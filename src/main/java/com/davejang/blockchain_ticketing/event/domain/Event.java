@@ -22,6 +22,10 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String posterUrl;
+
+    private String deployAddress;
+
     @NotBlank
     private String eventName;
 
@@ -44,7 +48,8 @@ public class Event {
     private LocalDate endDate;
 
     @Builder
-    public Event(String eventName,
+    public Event(String posterUrl,
+                 String eventName,
                  String description,
                  String location,
                  String performanceTime,
@@ -52,6 +57,7 @@ public class Event {
                  int price,
                  LocalDate startDate,
                  LocalDate endDate) {
+        this.posterUrl = posterUrl;
         this.eventName = eventName;
         this.description = description;
         this.location = location;

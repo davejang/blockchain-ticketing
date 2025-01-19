@@ -38,7 +38,8 @@ public class EventService {
     }
 
     @Transactional
-    public Event registerEvent(String eventName,
+    public Event registerEvent(String imagePath,
+                               String eventName,
                                String description,
                                String location,
                                String performanceTime,
@@ -64,6 +65,7 @@ public class EventService {
         }
 
         Event event = Event.builder()
+                .posterUrl(imagePath)
                 .eventName(eventName)
                 .description(description)
                 .location(location)

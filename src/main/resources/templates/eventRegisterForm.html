@@ -21,25 +21,31 @@
                         <h6 class="m-0 font-weight-bold text-primary">이벤트 등록</h6>
                     </div>
                     <div class="card-body row justify-content-center">
-                            <form th:action="@{/event}" method="post" th:object="${eventForm}" onsubmit="return showConfirm()">
+                            <form th:action="@{/event}" method="post" th:object="${eventForm}" onsubmit="return showConfirm()" enctype="multipart/form-data">
                                 <div class="row md-4">
                                     <div class="form-group">
-                                        <div>
-                                            <input class="form-control form-control-user" name="eventName" id="eventName" placeholder="이벤트명">
+                                        <div class="mb-3">
+                                            <label for="poster">포스터</label>
+                                            <p class="mb-1"></p>
+                                            <input type="file"  name="poster" id="poster" accept="image/*">
                                         </div>
-                                        <div>
+                                        <div class="mb-3">
+                                            <label for="eventName">타이틀</label>
+                                            <input class="form-control form-control-user" name="eventName" id="eventName">
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="description">공연정보</label>
                                             <textarea class="form-control form-control-user" name="description" id="description"></textarea>
                                         </div>
-                                        <div>
+                                        <div class="mb-3">
                                             <label for="location">공연장소</label>
                                             <input class="form-control" name="location" id="location">
                                         </div>
-                                        <div>
+                                        <div class="mb-3">
                                             <label for="performanceTime">공연시간</label>
                                             <input class="form-control" name="performanceTime" id="performanceTime">
                                         </div>
-                                        <div>
+                                        <div class="mb-3">
                                             <label for="rating">관람등급</label>
                                             <select class="form-control form-control-user" name="rating" id="rating">
                                                 <option th:value="ALL" th:text="|전체 이용가|"></option>
@@ -48,15 +54,15 @@
                                                 <option th:value="R18" th:text="|18세 이용가|"></option>
                                             </select>
                                         </div>
-                                        <div>
+                                        <div class="mb-3">
                                             <label for="price">가격</label>
                                             <input class="form-control" type="number" name="price" id="price" min="0" value="0">
                                         </div>
-                                        <div>
+                                        <div class="mb-3">
                                             <label for="startDate">공연 시작일</label>
                                             <input class="form-control" type="date" name="startDate" id="startDate">
                                         </div>
-                                        <div>
+                                        <div class="mb-3">
                                             <label for="endDate">공연 종료일</label>
                                             <input class="form-control" type="date" name="endDate" id="endDate">
                                         </div>

@@ -37,7 +37,7 @@ public class AdminController {
         return "eventRegister";
     }
 
-    @GetMapping("/event/register")
+    @GetMapping("/event-console/register")
     public String eventRegisterForm(Model model) {
         return "eventRegisterForm";
     }
