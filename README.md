@@ -13,6 +13,7 @@ Kaia 블록체인을 API로 사용할 수 있는 서비스이며, Dapp 개발 �
 ## Dependencies
 ```
 caver-java-ext-kas:1.0.0
+owncloud:10.15
 ```
 
 ## References
