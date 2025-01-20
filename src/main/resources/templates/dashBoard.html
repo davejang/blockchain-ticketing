@@ -4,25 +4,87 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+        }
+
+        .swiper-container {
+          width: 100%;
+          height: 50vh;
+          position: relative;
+          overflow-x: hidden;
+        }
+
+        .swiper-slide {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+          text-align: center;
+          background: #f0f0f0;
+          border: 2px solid #ddd;
+          border-radius: 10px;
+          padding: 20px;
+          box-sizing: border-box;
+          position: relative;
+        }
+
+        .swiper-pagination-bullet {
+          background-color: #007aff;
+        }
+
+        .swiper-pagination-bullet-active {
+          background-color: #ff5733;
+        }
+    </style>
     <title>KaiaTicket</title>
 </head>
 <body>
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Empty</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Hompeage template</p>
+<nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Topbar Search -->
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
         </div>
+    </form>
+</nav>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">2021년 - 시작</div>
+        <div class="swiper-slide">2022년 - 발전</div>
+        <div class="swiper-slide">2023년 - 성장</div>
+        <div class="swiper-slide">2024년 - 확장</div>
+        <div class="swiper-slide">2025년 - 성취</div>
     </div>
-</header>
+
+    <!-- Pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- Navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <div class="col mb-5" th:if="${not #lists.isEmpty(eventList)}" th:each="row, iterStat:${eventList}">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top" th:src="@{${row.posterUrl}}" alt="OwnCloud Image">
+                    <img class="card-img-top" th:src="@{${row.posterUrl}}" alt="OwnCloud Image" width="206" height="293">
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
@@ -48,5 +110,26 @@
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="/js/sb-admin-2.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+      loop: true, // 무한 루프
+      spaceBetween: 30, // 슬라이드 간격
+      centeredSlides: true, // 슬라이드 중앙 정렬
+      slidesPerView: 1, // 한 번에 하나의 슬라이드
+      pagination: {
+        el: '.swiper-pagination', // 페이지네이션 엘리먼트
+        clickable: true, // 페이지네이션 클릭 가능
+      },
+      navigation: {
+        nextEl: '.swiper-button-next', // '다음' 버튼
+        prevEl: '.swiper-button-prev', // '이전' 버튼
+      },
+      autoplay: {
+        delay: 25000, // 슬라이드 간 자동 전환 시간
+        disableOnInteraction: false, // 슬라이드가 클릭되었을 때 자동 전환 비활성화 여부
+      },
+    });
+</script>
 </body>
 </html>
