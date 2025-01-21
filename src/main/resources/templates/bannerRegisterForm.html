@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <title>KaiaTicket</title>
+</head>
+<body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <ul th:replace="~{adminNavigation :: adminNavigationFragment}"></ul>
+    <div class="container-fluid">
+        <p class="mb-4"></p>
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-8 col-md-9 position-relative">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">배너 등록</h6>
+                    </div>
+                    <div class="card-body row justify-content-center">
+                            <form th:action="@{/banner}" method="post" th:object="${bannerForm}" onsubmit="return showConfirm()" enctype="multipart/form-data">
+                                <div class="row md-4">
+                                    <div class="form-group">
+                                        <div class="mb-3">
+                                            <label for="bannerImage">배너 이미지</label>
+                                            <p class="mb-1"></p>
+                                            <input type="file"  name="bannerImage" id="bannerImage" accept="image/*">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="bannerTitle">배너명</label>
+                                            <input class="form-control form-control-user" name="bannerTitle" id="bannerTitle">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <button type="submit" class="btn btn-primary">제출</button>
+<!--                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">닫기</button>-->
+                                </div>
+                                <div class="row justify-content-center" th:if="${message}" style="color: red;">
+                                    <p th:text="${message}"></p>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showConfirm() {
+        const result = confirm("등록하시겠습니까?");
+        if(result) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+</script>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/js/sb-admin-2.js"></script>
+<script src="/js/chart-area-demo.js"></script>
+
+</body>
+</html>

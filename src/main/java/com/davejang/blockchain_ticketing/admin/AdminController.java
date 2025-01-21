@@ -1,5 +1,7 @@
 package com.davejang.blockchain_ticketing.admin;
 
+import com.davejang.blockchain_ticketing.banner.domain.Banner;
+import com.davejang.blockchain_ticketing.banner.service.BannerService;
 import com.davejang.blockchain_ticketing.event.domain.Event;
 import com.davejang.blockchain_ticketing.event.service.EventService;
 import com.davejang.blockchain_ticketing.member.domain.Member;
@@ -17,11 +19,15 @@ import java.util.List;
 public class AdminController {
     private final MemberService memberService;
     private final EventService eventService;
+    private final BannerService bannerService;
 
     @Autowired
-    public AdminController(MemberService memberService, EventService eventService) {
+    public AdminController(MemberService memberService,
+                           EventService eventService,
+                           BannerService bannerService) {
         this.memberService = memberService;
         this.eventService = eventService;
+        this.bannerService = bannerService;
     }
 
     @GetMapping("/dashboard")
@@ -48,5 +54,18 @@ public class AdminController {
         model.addAttribute("memberList", memberList);
 
         return "userList";
+    }
+
+    @GetMapping("/banner-console")
+    public String bannerManagement(Model model) {
+        List<Banner> bannerList = bannerService.findAllBanners();
+        model.addAttribute("bannerList", bannerList);
+
+        return "bannerRegister";
+    }
+
+    @GetMapping("/banner-console/register")
+    public String bannerRegisterForm(Model model) {
+        return "bannerRegisterForm";
     }
 }

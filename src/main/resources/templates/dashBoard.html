@@ -15,6 +15,7 @@
           height: 50vh;
           position: relative;
           overflow-x: hidden;
+          overflow-y: hidden;
         }
 
         .swiper-slide {
@@ -26,7 +27,7 @@
           background: #f0f0f0;
           border: 2px solid #ddd;
           border-radius: 10px;
-          padding: 20px;
+<!--          padding: 20px;-->
           box-sizing: border-box;
           position: relative;
         }
@@ -37,6 +38,11 @@
 
         .swiper-pagination-bullet-active {
           background-color: #ff5733;
+        }
+
+        img {
+          width: 100%;  /* 이미지가 부모 요소의 너비에 맞게 조정됨 */
+          height: auto;  /* 비율을 유지하면서 자동으로 높이 조정 */
         }
     </style>
     <title>KaiaTicket</title>
@@ -63,19 +69,17 @@
 </nav>
 <div class="swiper-container">
     <div class="swiper-wrapper">
-        <div class="swiper-slide">2021년 - 시작</div>
-        <div class="swiper-slide">2022년 - 발전</div>
-        <div class="swiper-slide">2023년 - 성장</div>
-        <div class="swiper-slide">2024년 - 확장</div>
-        <div class="swiper-slide">2025년 - 성취</div>
+        <div class="swiper-slide" th:each="row, iterStat:${bannerList}">
+            <img th:src="@{${row.imageUrl}}" alt="OwnCloud Image">
+        </div>
     </div>
 
     <!-- Pagination -->
     <div class="swiper-pagination"></div>
 
-    <!-- Navigation buttons -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+<!--    &lt;!&ndash; Navigation buttons &ndash;&gt;-->
+<!--    <div class="swiper-button-next"></div>-->
+<!--    <div class="swiper-button-prev"></div>-->
 </div>
 
 <section class="py-5">
@@ -126,7 +130,7 @@
         prevEl: '.swiper-button-prev', // '이전' 버튼
       },
       autoplay: {
-        delay: 25000, // 슬라이드 간 자동 전환 시간
+        delay: 5000, // 슬라이드 간 자동 전환 시간
         disableOnInteraction: false, // 슬라이드가 클릭되었을 때 자동 전환 비활성화 여부
       },
     });

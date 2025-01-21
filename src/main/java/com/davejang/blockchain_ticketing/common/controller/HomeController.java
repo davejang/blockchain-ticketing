@@ -1,5 +1,7 @@
 package com.davejang.blockchain_ticketing.common.controller;
 
+import com.davejang.blockchain_ticketing.banner.domain.Banner;
+import com.davejang.blockchain_ticketing.banner.service.BannerService;
 import com.davejang.blockchain_ticketing.event.domain.Event;
 import com.davejang.blockchain_ticketing.event.service.EventService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,16 +20,22 @@ import java.util.List;
 public class HomeController {
 
     private final EventService eventService;
+    private final BannerService bannerService;
 
     @Autowired
-    public HomeController(EventService eventService) {
+    public HomeController(EventService eventService,
+                          BannerService bannerService ) {
         this.eventService = eventService;
+        this.bannerService = bannerService;
     }
 
     @GetMapping
     public String goToDashBoard(Model model) {
         List<Event> eventList = eventService.findAllEvents();
         model.addAttribute("eventList", eventList);
+
+        List<Banner> bannerList = bannerService.findAllBanners();
+        model.addAttribute("bannerList", bannerList);
 
         return "dashBoard";
     }
