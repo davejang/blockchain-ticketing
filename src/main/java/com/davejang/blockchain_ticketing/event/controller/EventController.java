@@ -2,6 +2,7 @@ package com.davejang.blockchain_ticketing.event.controller;
 
 import com.davejang.blockchain_ticketing.common.service.OwnCloudService;
 import com.davejang.blockchain_ticketing.event.domain.Event;
+import com.davejang.blockchain_ticketing.event.domain.EventDocument;
 import com.davejang.blockchain_ticketing.event.dto.EventFormDto;
 import com.davejang.blockchain_ticketing.event.service.EventService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/event")
@@ -115,5 +117,14 @@ public class EventController {
         }
 
         return "redirect:/admin/event-console";
+    }
+
+    @PostMapping(value = "/search")
+    public String searchEvent(String keyword,
+                              Model model) {
+        List<EventDocument> eventList = eventService.searchEvents(keyword);
+        model.addAttribute("eventList", eventList);
+
+        return "searchResults";
     }
 }

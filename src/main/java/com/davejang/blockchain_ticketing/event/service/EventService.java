@@ -1,8 +1,10 @@
 package com.davejang.blockchain_ticketing.event.service;
 
 import com.davejang.blockchain_ticketing.event.domain.Event;
+import com.davejang.blockchain_ticketing.event.domain.EventDocument;
 import com.davejang.blockchain_ticketing.event.domain.Rating;
 import com.davejang.blockchain_ticketing.event.repository.EventRepository;
+import com.davejang.blockchain_ticketing.event.repository.EventSearchRepository;
 import com.davejang.blockchain_ticketing.member.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,13 @@ import java.util.Optional;
 @Slf4j
 public class EventService {
     private final EventRepository eventRepository;
+    private final EventSearchRepository eventSearchRepository;
 
     @Autowired
-    public EventService(EventRepository eventRepository) {
+    public EventService(EventRepository eventRepository,
+                        EventSearchRepository eventSearchRepository) {
         this.eventRepository = eventRepository;
+        this.eventSearchRepository = eventSearchRepository;
     }
 
     public List<Event> findAllEvents() {
@@ -76,7 +81,15 @@ public class EventService {
                 .endDate(endDateParse)
                 .build();
 
-        return eventRepository.save(event);
+        EventDocument eventDocument = EventDocument.builder()
+                .eventName(eventName)
+                .location(location)
+                .build();
+
+        eventRepository.save(event);
+        eventSearchRepository.save(eventDocument);
+
+        return event;
     }
 
     @Transactional
@@ -88,5 +101,9 @@ public class EventService {
             throw new IllegalArgumentException("존재하지 않는 이벤트입니다");
         }
         eventRepository.delete(event.get());
+    }
+
+    public List<EventDocument> searchEvents(String keyword) {
+        return eventSearchRepository.findByEventName(keyword);
     }
 }
