@@ -104,6 +104,11 @@ public class EventService {
     }
 
     public List<EventDocument> searchEvents(String keyword) {
-        return eventSearchRepository.findByEventName(keyword);
+        try {
+            List<EventDocument> eventList = eventSearchRepository.findByEventNameContaining(keyword);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return eventSearchRepository.findByEventNameContaining(keyword);
     }
 }

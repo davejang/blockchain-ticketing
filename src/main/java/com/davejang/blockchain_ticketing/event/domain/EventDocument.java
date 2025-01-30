@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 public class EventDocument {
 
     @Id
-    private Long id;
+    private String id;
 
     private String eventName;
 
