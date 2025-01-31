@@ -2,6 +2,7 @@ package com.davejang.blockchain_ticketing.event.service;
 
 import com.davejang.blockchain_ticketing.event.domain.Event;
 import com.davejang.blockchain_ticketing.event.domain.EventDocument;
+import com.davejang.blockchain_ticketing.event.domain.Genre;
 import com.davejang.blockchain_ticketing.event.domain.Rating;
 import com.davejang.blockchain_ticketing.event.repository.EventRepository;
 import com.davejang.blockchain_ticketing.event.repository.EventSearchRepository;
@@ -45,6 +46,7 @@ public class EventService {
     @Transactional
     public Event registerEvent(String imagePath,
                                String eventName,
+                               String genre,
                                String description,
                                String location,
                                String performanceTime,
@@ -72,6 +74,7 @@ public class EventService {
         Event event = Event.builder()
                 .posterUrl(imagePath)
                 .eventName(eventName)
+                .genre(Genre.valueOf(genre))
                 .description(description)
                 .location(location)
                 .performanceTime(performanceTime)

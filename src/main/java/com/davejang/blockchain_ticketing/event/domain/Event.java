@@ -30,6 +30,9 @@ public class Event {
     @NotBlank
     private String eventName;
 
+    @Enumerated(EnumType.STRING)
+    private Genre genre;
+
     private String description;
 
     private String location;
@@ -51,6 +54,7 @@ public class Event {
     @Builder
     public Event(String posterUrl,
                  String eventName,
+                 Genre genre,
                  String description,
                  String location,
                  String performanceTime,
@@ -60,6 +64,7 @@ public class Event {
                  LocalDate endDate) {
         this.posterUrl = posterUrl;
         this.eventName = eventName;
+        this.genre = genre;
         this.description = description;
         this.location = location;
         this.performanceTime = performanceTime;

@@ -10,6 +10,8 @@ public class EventFormDto {
 
     private String eventName;
 
+    private String genre;
+
     private String description;
 
     private String location;

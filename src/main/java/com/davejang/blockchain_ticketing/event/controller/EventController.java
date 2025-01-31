@@ -8,6 +8,7 @@ import com.davejang.blockchain_ticketing.event.service.EventService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,11 @@ import java.util.List;
 @RequestMapping(value = "/event")
 @Slf4j
 public class EventController {
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    private static final String COUNTER_KEY = "event-counter";
 
     private final EventService eventService;
     private final OwnCloudService ownCloudService;
@@ -67,6 +73,7 @@ public class EventController {
             MultipartFile file = eventForm.getPoster();
             Path tempFile = Files.createTempFile("upload-", file.getOriginalFilename());
             Files.write(tempFile, file.getBytes());
+//            String filename = "event" + redisTemplate.opsForValue().increment(COUNTER_KEY);
 
             filePath = ownCloudService.uploadToOwnCloud(tempFile, file.getOriginalFilename(), directory);
             Files.deleteIfExists(tempFile);
@@ -85,6 +92,7 @@ public class EventController {
             Event registerEvent = eventService.registerEvent(
                     filePath,
                     eventForm.getEventName(),
+                    eventForm.getGenre(),
                     eventForm.getDescription(),
                     eventForm.getLocation(),
                     eventForm.getPerformanceTime(),

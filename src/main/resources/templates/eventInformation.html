@@ -5,23 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
     <title>KaiaTicket</title>
+    <style>
+        h2 {
+
+        }
+        li {
+            display: flex;
+            list-style: none;
+        }
+        .infoLabel {
+            display: inline-block;
+            width: 5rem;
+            color: #000;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
-<!--<div>-->
-<!--    <a th:text="${event.eventName}"></a>-->
-<!--</div>-->
-<section class="py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="@{${event.posterUrl}}" alt="OwnCloud Image"></div>
-            <div class="col-md-6">
-                <div class="small mb-1">SKU: BST-498</div>
-                <h1 class="display-5 fw-bolder" th:text="${event.eventName}"></h1>
-                <div class="fs-5 mb-5">
-                    <span class="text-decoration-line-through">$45.00</span>
-                </div>
-                <p class="lead" th:text="${event.description}"></p>
+<section class="py-3">
+    <div class="container px-4 px-lg-5 my-4">
+        <div class="row-md-auto gx-4 gx-lg-5 mb-4">
+            <h2 class="text-dark" th:if="${event.genre.toString() == 'musical'}" th:text="'뮤지컬' + ' <' + ${event.eventName} + '>' "></h2>
+            <h2 class="text-dark" th:if="${event.genre.toString() == 'concert'}" th:text="'콘서트' + ' <' + ${event.eventName} + '>' "></h2>
+            <h2 class="text-dark" th:if="${event.genre.toString() == 'theater'}" th:text="'연극' + ' <' + ${event.eventName} + '>' "></h2>
+            <h2 class="text-dark" th:if="${event.genre.toString() == 'exhibition'}" th:text="'전시/행사' + ' <' + ${event.eventName} + '>' "></h2>
+            <h2 class="text-dark" th:if="${event.genre.toString() == 'sports'}" th:text="'스포츠' + ' <' + ${event.eventName} + '>' "></h2>
+        </div>
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-md-auto">
+                <img class=" mb-5 mb-md-0" th:src="@{${event.posterUrl}}" alt="OwnCloud Image" width="300" height="424">
+            </div>
+            <div class="col-md-auto mt-2">
+                <ul>
+                    <li class="mb-3">
+                        <strong class="infoLabel">장소</strong>
+                        <div class="ml-1" th:text="${event.location}"></div>
+                    </li>
+                    <li class="mb-3">
+                        <strong class="infoLabel">공연기간</strong>
+                        <div class="ml-1" th:text="${event.startDate + ' ~ ' + event.endDate}"></div>
+                    </li>
+                    <li class="mb-3">
+                        <strong class="infoLabel">공연시간</strong>
+                        <div class="ml-1" th:text="${event.performanceTime}"></div>
+                    </li>
+                    <li class="mb-3">
+                        <strong class="infoLabel">관람연령</strong>
+                        <div th:if="${event.rating.toString() == 'ALL'}" class="ml-1" th:text="전체이용가"></div>
+                        <div th:if="${event.rating.toString() == 'R12'}" class="ml-1" th:text="12세이용가"></div>
+                        <div th:if="${event.rating.toString() == 'R15'}" class="ml-1" th:text="15세이용가"></div>
+                        <div th:if="${event.rating.toString() == 'R18'}" class="ml-1" th:text="18세이용가"></div>
+                    </li>
+                    <li class="mb-3">
+                        <strong class="infoLabel">가격</strong>
+                        <div class="ml-1" th:text="${event.price + '원'}"></div>
+                    </li>
+                </ul>
+<!--                <p class="lead" th:text="${event.description}"></p>-->
             </div>
         </div>
     </div>

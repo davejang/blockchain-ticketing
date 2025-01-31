@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
         body {
@@ -44,28 +46,56 @@
           width: 100%;  /* 이미지가 부모 요소의 너비에 맞게 조정됨 */
           height: auto;  /* 비율을 유지하면서 자동으로 높이 조정 */
         }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: black;
+            text-decoration: none;
+        }
     </style>
     <title>KaiaTicket</title>
 </head>
 <body>
-<nav th:replace="~{navbar :: navbarFragment}"></nav>
-<nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+<nav th:replace="~{searchNavbar :: searchNavbarFragment}"></nav>
+<nav class="navbar navbar-expand navbar-light bg-white topbar static-top pl-4 pr-4">
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown no-arrow mr-4">
+            <a class="mr-2 d-none d-lg-inline text-gray-800 large" href="#">뮤지컬</a>
+        </li>
+        <li class="nav-item dropdown no-arrow mr-4">
+            <a class="mr-2 d-none d-lg-inline text-gray-800 large" href="#">콘서트</a>
+        </li>
+        <li class="nav-item dropdown no-arrow mr-4">
+            <a class="mr-2 d-none d-lg-inline text-gray-800 large" href="#">연극</a>
+        </li>
+        <li class="nav-item dropdown no-arrow mr-4">
+            <a class="mr-2 d-none d-lg-inline text-gray-800 large" href="#">전시/행사</a>
+        </li>
+        <li class="nav-item dropdown no-arrow mr-2">
+            <a class="mr-2 d-none d-lg-inline text-gray-800 large" href="#">스포츠</a>
+        </li>
+    </ul>
+    <div class="topbar-divider d-none d-sm-block"></div>
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown no-arrow mr-4 ml-2">
+            <a class="mr-2 d-none d-lg-inline text-gray-800 large" href="#">랭킹</a>
+        </li>
+        <li class="nav-item dropdown no-arrow mr-4">
+            <a class="mr-2 d-none d-lg-inline text-gray-800 large" href="#">지역</a>
+        </li>
+        <li class="nav-item dropdown no-arrow mr-4">
+            <a class="mr-2 d-none d-lg-inline text-gray-800 large" href="#">이벤트</a>
+        </li>
+    </ul>
 
-    <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" th:action="@{/event/search}" method="post" th:object="${keyword}">
-        <div class="input-group">
-            <input id="keyword" name="keyword" type="text" class="form-control bg-light border-0 small" placeholder="이벤트 검색" aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
-        </div>
-    </form>
 </nav>
 <div class="swiper-container">
     <div class="swiper-wrapper">
@@ -82,29 +112,26 @@
 <!--    <div class="swiper-button-prev"></div>-->
 </div>
 
-<section class="py-5">
+<section class="py-3">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <div class="col mb-5" th:if="${not #lists.isEmpty(eventList)}" th:each="row, iterStat:${eventList}">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" th:src="@{${row.posterUrl}}" alt="OwnCloud Image" width="206" height="293">
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder" th:text="${row.eventName}"></h5>
-                            <!-- Product price-->
-                            <a th:text="${row.price}"></a>
+                <a role="link" th:href="@{/event/{id}(id=${row.id})}" style="display:block; cursor: pointer">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" th:src="@{${row.posterUrl}}" alt="OwnCloud Image" width="206" height="293">
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder" th:text="${row.eventName}"></h5>
+                                <!-- Product price-->
+                                <span th:text="${row.price}"></span>
+                            </div>
                         </div>
                     </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center">
-                            <a class="btn btn-outline-dark mt-auto" th:href="@{/event/{id}(id=${row.id})}">View options</a>
-                        </div>
-                    </div>
-                </div>
+                </a>
+
             </div>
         </div>
     </div>

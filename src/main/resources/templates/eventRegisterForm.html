@@ -28,6 +28,18 @@
                                             <label for="poster">포스터</label>
                                             <p class="mb-1"></p>
                                             <input type="file"  name="poster" id="poster" accept="image/*">
+                                            <p class="mb-1"></p>
+                                            <img id="preview" src="" alt="이미지 미리보기" style="max-width: 300px; display: none;">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="rating">유형</label>
+                                            <select class="form-control form-control-user" name="genre" id="genre">
+                                                <option th:value="musical" th:text="|뮤지컬|"></option>
+                                                <option th:value="concert" th:text="|콘서트|"></option>
+                                                <option th:value="theater" th:text="|연극|"></option>
+                                                <option th:value="exhibition" th:text="|공연/전시|"></option>
+                                                <option th:value="sports" th:text="|스포츠|"></option>
+                                            </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="eventName">타이틀</label>
@@ -117,6 +129,20 @@
             return false
         }
     }
+</script>
+<script>
+    document.getElementById('poster').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('preview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 </script>
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
