@@ -18,10 +18,12 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "event")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "event_id")
+    private Long id;
 
     private String posterUrl;
 
@@ -31,15 +33,19 @@ public class Event {
     private String eventName;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Genre genre;
 
     private String description;
 
+    @NotBlank
     private String location;
 
+    @NotBlank
     private String performanceTime;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Rating rating;
 
     @NotNull
@@ -51,6 +57,9 @@ public class Event {
     @NotNull
     private LocalDate endDate;
 
+    @NotBlank
+    private String documentId;
+
     @Builder
     public Event(String posterUrl,
                  String eventName,
@@ -61,7 +70,8 @@ public class Event {
                  Rating rating,
                  int price,
                  LocalDate startDate,
-                 LocalDate endDate) {
+                 LocalDate endDate,
+                 String documentId) {
         this.posterUrl = posterUrl;
         this.eventName = eventName;
         this.genre = genre;
@@ -72,6 +82,7 @@ public class Event {
         this.price = price;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.documentId = documentId;
     }
 
 }

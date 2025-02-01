@@ -43,7 +43,7 @@ public class EventService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Event registerEvent(String imagePath,
                                String eventName,
                                String genre,
@@ -71,6 +71,13 @@ public class EventService {
             throw new IllegalArgumentException("날짜를 확인하세요");
         }
 
+        EventDocument eventDocument = EventDocument.builder()
+                .eventName(eventName)
+                .location(location)
+                .build();
+
+        String documentId = eventSearchRepository.save(eventDocument).getId();
+
         Event event = Event.builder()
                 .posterUrl(imagePath)
                 .eventName(eventName)
@@ -82,15 +89,10 @@ public class EventService {
                 .price(price)
                 .startDate(startDateParse)
                 .endDate(endDateParse)
-                .build();
-
-        EventDocument eventDocument = EventDocument.builder()
-                .eventName(eventName)
-                .location(location)
+                .documentId(documentId)
                 .build();
 
         eventRepository.save(event);
-        eventSearchRepository.save(eventDocument);
 
         return event;
     }
@@ -103,6 +105,8 @@ public class EventService {
             log.info("이벤트가 존재하지 않습니다. {}", eventName);
             throw new IllegalArgumentException("존재하지 않는 이벤트입니다");
         }
+
+        eventSearchRepository.deleteById(event.get().getDocumentId());
         eventRepository.delete(event.get());
     }
 

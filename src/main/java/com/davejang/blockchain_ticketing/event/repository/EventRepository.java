@@ -1,6 +1,7 @@
 package com.davejang.blockchain_ticketing.event.repository;
 
 import com.davejang.blockchain_ticketing.event.domain.Event;
+import com.davejang.blockchain_ticketing.event.domain.EventDocumentMap;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
